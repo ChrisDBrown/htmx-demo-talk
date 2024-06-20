@@ -1,0 +1,39 @@
+parameters:
+    paths:
+        - ./src
+        - ./tests
+    layers:
+        -   name: Domain
+            collectors:
+                -   type: className
+                    regex: App\\Domain\\.*
+        -   name: Application
+            collectors:
+                -   type: className
+                    regex: App\\Application\\.*
+        -   name: Infrastructure
+            collectors:
+                -   type: className
+                    regex: App\\Infrastructure\\.*
+        -   name: Data
+            collectors:
+                -   type: className
+                    regex: App\\Data\\.*
+        -   name: Test
+            collectors:
+                -   type: className
+                    regex: App\\Tests\\.*
+    ruleset:
+        Domain:
+        Application:
+            - Domain
+        Infrastructure:
+            - Domain
+            - Application
+        Data:
+            - Domain
+        Test: 
+            - Domain
+            - Application
+            - Infrastructure
+            - Data

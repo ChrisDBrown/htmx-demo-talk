@@ -1,0 +1,12 @@
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    App\Application\QueryHandler\GetProfileQueryHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Query\GetProfileQuery, bus: query }
+    App\Application\QueryHandler\GetProfilesQueryHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Query\GetProfilesQuery, bus: query }
