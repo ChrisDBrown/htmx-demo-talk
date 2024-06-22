@@ -59,10 +59,10 @@ rector-fix: ## Run Rector analysis and auto-fix issues
 	@$(PHP_CONT) vendor/bin/rector
 
 cs: ## Run coding standards check with --dry-run flag to report errors without fixing
-	@$(PHP_CONT) vendor/bin/php-cs-fixer fix --dry-run --allow-risky=yes -v
+	@$(PHP_CONT) vendor/bin/php-cs-fixer fix --dry-run -v
 
 cs-fix: ## Run coding standards check and auto-fix issues
-	@$(PHP_CONT) vendor/bin/php-cs-fixer fix --allow-risky=yes
+	@$(PHP_CONT) vendor/bin/php-cs-fixer fix
 
 deptrac: ## Check our domain boundaries haven't been crossed
 	@$(PHP_CONT) vendor/bin/deptrac
@@ -77,10 +77,10 @@ all: test stan rector cs deptrac var-dump ## Run all our code quality tools as o
 
 ## —— Database 📋 ——————————————————————————————————————————————————————————————
 db-reset:
-	@$(SYMFONY) doctrine:database:drop --force --if-exists
-	@$(SYMFONY) doctrine:database:drop --force --if-exists --env=test
-	@$(SYMFONY) doctrine:database:create --if-not-exists
-	@$(SYMFONY) doctrine:database:create --if-not-exists --env=test
+	@$(SYMFONY) doctrine:database:drop --force
+	@$(SYMFONY) doctrine:database:drop --force --env=test
+	@$(SYMFONY) doctrine:database:create
+	@$(SYMFONY) doctrine:database:create --env=test
 
 migrations-diff: ##@Doctrine Generates a database migration by comparing the current database to the mapping information
 	@$(SYMFONY) doctrine:migrations:diff

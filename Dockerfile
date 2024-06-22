@@ -20,6 +20,7 @@ RUN apk add --no-cache \
 		file \
 		gettext \
 		git \
+    	sqlite \
 	;
 
 RUN set -eux; \
@@ -36,7 +37,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 
 ###> recipes ###
 ###> doctrine/doctrine-bundle ###
-RUN install-php-extensions pdo_pgsql
+RUN install-php-extensions pdo_sqlite
 ###< doctrine/doctrine-bundle ###
 ###< recipes ###
 
