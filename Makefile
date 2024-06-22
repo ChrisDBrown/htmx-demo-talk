@@ -35,6 +35,12 @@ logs: ## Show live logs
 sh: ## Connect to the FrankenPHP container
 	@$(PHP_CONT) sh
 
+prod: ## Do everything needed for a fresh production setup
+	@$(DOCKER_COMP) -f compose.yaml -f compose.prod.yaml up -d --wait
+	@$(SYMFONY) doctrine:database:drop --force
+	@$(SYMFONY) doctrine:database:create
+	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
+
 ## —— Tools 🛠️ ——————————————————————————————————————————————————————————————————
 test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
 	@$(eval c ?=)
