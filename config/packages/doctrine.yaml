@@ -16,11 +16,9 @@ doctrine:
         auto_mapping: true
         mappings:
             App:
-                type: xml
-                is_bundle: false
+                type: attribute
                 prefix: App\Domain\Model\Entity
-                dir: '%kernel.project_dir%/src/Resources/config/doctrine/entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/Domain/Model/Entity'
 
 when@test:
     doctrine:

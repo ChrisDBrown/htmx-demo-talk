@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional;
 
-use App\Domain\Model\Entity\Profile;
 use App\Kernel;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,7 +12,6 @@ use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
-use Symfony\Component\Uid\Uuid;
 
 abstract class FunctionalTest extends WebTestCase
 {
@@ -48,16 +46,5 @@ abstract class FunctionalTest extends WebTestCase
         $command = $app->find($name);
 
         return new CommandTester($command);
-    }
-
-    protected function persistProfileForName(string $name): Profile
-    {
-        $uuid = Uuid::v4();
-        $profile = new Profile($uuid, $name);
-
-        $this->entityManager->persist($profile);
-        $this->entityManager->flush();
-
-        return $profile;
     }
 }
