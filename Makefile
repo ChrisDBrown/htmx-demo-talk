@@ -56,7 +56,7 @@ test-unit: ## Run unit testsuite with phpunit
 	@$(DOCKER_COMP) exec -e APP_ENV=test php bin/phpunit --testsuite Unit
 
 stan: ## Run PHPStan analyse
-	@$(PHP_CONT) vendor/bin/phpstan analyse
+	@$(PHP_CONT) vendor/bin/phpstan analyse --memory-limit=-1
 
 rector: ## Run Rector analysis with --dry-run flag to report errors without fixing
 	@$(PHP_CONT) vendor/bin/rector --dry-run

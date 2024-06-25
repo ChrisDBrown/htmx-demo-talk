@@ -8,7 +8,7 @@ use App\Domain\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Component\Uid\UuidV7;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_USERNAME', fields: ['username'])]
@@ -20,16 +20,23 @@ class User implements UserInterface
     #[ORM\Column]
     private array $roles = [];
 
-    public function __construct(#[ORM\Id]
+    #[ORM\Column(type: 'integer')]
+    private int $lastReadOffset = 0;
+
+    #[ORM\Column(type: 'datetime_immutable')]
+    private \DateTimeImmutable $createdAt;
+
+    public function __construct(
+        #[ORM\Id]
         #[ORM\Column(type: UuidType::NAME, unique: true)]
-        #[ORM\GeneratedValue(strategy: 'CUSTOM')]
-        #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
-        private Uuid $id, #[ORM\Column(length: 180)]
-        private string $username)
-    {
+        private UuidV7 $id,
+        #[ORM\Column(length: 180)]
+        private string $username,
+    ) {
+        $this->createdAt = new \DateTimeImmutable();
     }
 
-    public function getId(): ?Uuid
+    public function getId(): UuidV7
     {
         return $this->id;
     }
@@ -37,6 +44,21 @@ class User implements UserInterface
     public function getUsername(): ?string
     {
         return $this->username;
+    }
+
+    public function setLastReadOffset(int $offset): void
+    {
+        $this->lastReadOffset = $offset;
+    }
+
+    public function getLastReadOffset(): int
+    {
+        return $this->lastReadOffset;
+    }
+
+    public function getCreatedAt(): \DateTimeImmutable
+    {
+        return $this->createdAt;
     }
 
     /**
