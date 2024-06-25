@@ -17,4 +17,10 @@ class FragmentController extends AbstractController
     {
         return $this->render('fragment/switch.html.twig');
     }
+
+    #[Route('/login', name: 'login', methods: [Request::METHOD_GET])]
+    public function login(): Response
+    {
+        return $this->render('fragment/login.html.twig', ['error' => null]);
+    }
 }

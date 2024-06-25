@@ -24,11 +24,13 @@ class PageController extends AbstractController
     }
 
     #[Route('/login', name: 'login', methods: [Request::METHOD_GET, Request::METHOD_POST])]
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(Request $request, AuthenticationUtils $authenticationUtils): Response
     {
+        $username = $request->request->get('username');
+
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        return $this->render('page/login.html.twig', ['error' => $error]);
+        return $this->render('page/login.html.twig', ['username' => $username, 'error' => $error]);
     }
 
     #[Route('/dashboard', name: 'dashboard', methods: [Request::METHOD_GET])]

@@ -5,15 +5,8 @@
 {% endblock %}
 
 {% block body %}
-    <div>
-        Log the fuck in bitch
-        <form action="{{ path('page_login') }}" method="post">
-            <label for="username">Username (alphanumeric):</label>
-            <input type="text" id="username" name="username" required><br><br>
-            <input type="submit" value="Submit">
-        </form>
-        {% if error %}
-            {{ error.message }}
-        {% endif %}
+    <div class="mx-auto max-w-4xl mt-24">
+        <h1 class="text-6xl md:text-8xl text-center"><<span class="text-blue-600">/</span>> htm<span class="text-blue-600">x</span></h1>
+        {{ include('fragment/login.html.twig') }}
     </div>
 {% endblock %}

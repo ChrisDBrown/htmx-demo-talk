@@ -1,1 +1,4 @@
-<h1>I am an h1 that has been loaded in</h1>
+<div class="mx-auto max-w-4xl text-center mt-24" id="container">
+    <p class="text-3xl mb-8">Hello, {{ app.user.username }}.<br />Please pretend I'm a fancy dashboard.</p>
+    <a href="{{ logout_path() }}" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-3xl font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">Sign Out</a>
+</div>
