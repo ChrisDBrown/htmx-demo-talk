@@ -1,5 +1,0 @@
-App\Application\Command\DeleteProfileCommand:
-    properties:
-        id:
-            - NotBlank: ~
-            - Uuid: ~

@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block javascripts %}
+    <script src="https://unpkg.com/htmx.org@2.0.0" integrity="sha384-wS5l5IKJBvK6sPTKa2WZ1js3d947pvWXbPJ1OmWfEuxLgeHcEbjUUA5i9V5ZkpCw" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block body %}
+    <div>
+        Log the fuck in bitch
+        <form action="{{ path('page_login') }}" method="post">
+            <label for="username">Username (alphanumeric):</label>
+            <input type="text" id="username" name="username" required><br><br>
+            <input type="submit" value="Submit">
+        </form>
+        {% if error %}
+            {{ error.message }}
+        {% endif %}
+    </div>
+{% endblock %}
