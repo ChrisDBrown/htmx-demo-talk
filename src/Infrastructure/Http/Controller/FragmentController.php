@@ -23,4 +23,34 @@ class FragmentController extends AbstractController
     {
         return $this->render('fragment/login.html.twig', ['error' => null]);
     }
+
+    #[Route('/feed', name: 'feed', methods: [Request::METHOD_GET])]
+    public function feed(): Response
+    {
+        return $this->render('fragment/feed.html.twig');
+    }
+
+    #[Route('/settings', name: 'settings', methods: [Request::METHOD_GET])]
+    public function settings(): Response
+    {
+        return $this->render('fragment/settings.html.twig');
+    }
+
+    #[Route('/message', name: 'message', methods: [Request::METHOD_GET])]
+    public function message(): Response
+    {
+        return $this->render('fragment/message.html.twig');
+    }
+
+    #[Route('/moods', name: 'moods', methods: [Request::METHOD_GET])]
+    public function moods(): Response
+    {
+        return $this->render('fragment/moods.html.twig');
+    }
+
+    #[Route('/closed-moods', name: 'closed_moods', methods: [Request::METHOD_GET])]
+    public function closedMoods(): Response
+    {
+        return $this->render('fragment/closed-moods.html.twig');
+    }
 }
