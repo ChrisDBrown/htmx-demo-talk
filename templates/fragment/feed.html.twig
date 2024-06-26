@@ -1,6 +1,6 @@
 <div class="tab-list flex justify-around w-full" role="tablist">
-    <button hx-get="{{ path('fragment_feed') }}" class="rounded-md bg-blue-500 px-3.5 py-2.5 text-3xl font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" role="tab" aria-selected="true" aria-controls="tab-content" disabled>Feed</button>
-    <button hx-get="{{ path('fragment_settings') }}" class="rounded-md bg-white px-3.5 py-2.5 text-3xl font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" role="tab" aria-selected="false" aria-controls="tab-content">Settings</button>
+    <button hx-post="{{ path('feed_full') }}" hx-push-url="{{ path('page_feed') }}" class="rounded-md bg-blue-500 px-3.5 py-2.5 text-3xl font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600" role="tab" aria-selected="true" aria-controls="tab-content" disabled>Feed</button>
+    <button hx-get="{{ path('fragment_settings') }}" hx-push-url="{{ path('page_settings') }}" class="rounded-md bg-white px-3.5 py-2.5 text-3xl font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50" role="tab" aria-selected="false" aria-controls="tab-content">Settings</button>
 </div>
 
 <div id="tab-content" role="tabpanel" class="tab-content">
@@ -17,6 +17,9 @@
                     reacted with 🎉</p>
                 <time datetime="{{ app.user.getCreatedAt().format('Y-m-d H:i:s') }}" class="flex-none py-0.5 text-xs leading-5 text-gray-500">{{ app.user.getCreatedAt().format('H:i:s') }}</time>
             </li>
+            {% for entry in entries %}
+                {{ include('fragment/message.html.twig') }}
+            {% endfor %}
         </ul>
 
         <!-- New comment form -->

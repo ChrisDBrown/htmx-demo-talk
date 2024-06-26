@@ -53,7 +53,7 @@ class ReactRepositoryTest extends IntegrationTest
 
         $expected = [$publicReact, $privateReact];
 
-        $actual = $this->repository->getReactsForUser($user, 30);
+        $actual = $this->repository->getReactsForUser($user->getId(), 0, 30);
 
         self::assertEquals($expected, $actual);
     }
@@ -86,11 +86,9 @@ class ReactRepositoryTest extends IntegrationTest
         $this->entityManager->persist($privateReact);
         $this->entityManager->flush();
 
-        $user->setLastReadOffset(18);
-
         $expected = [$privateReact];
 
-        $actual = $this->repository->getReactsForUser($user, 30);
+        $actual = $this->repository->getReactsForUser($user->getId(), 18, 30);
 
         self::assertEquals($expected, $actual);
     }
@@ -125,7 +123,7 @@ class ReactRepositoryTest extends IntegrationTest
 
         $expected = [$publicReact];
 
-        $actual = $this->repository->getReactsForUser($user, 30);
+        $actual = $this->repository->getReactsForUser($user->getId(), 0, 30);
 
         self::assertEquals($expected, $actual);
     }

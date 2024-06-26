@@ -52,7 +52,7 @@ class MessageRepositoryTest extends IntegrationTest
 
         $expected = [$publicMessage, $privateMessage];
 
-        $actual = $this->repository->getMessagesForUser($user, 30);
+        $actual = $this->repository->getMessagesForUser($user->getId(), 0, 30);
 
         self::assertEquals($expected, $actual);
     }
@@ -85,11 +85,9 @@ class MessageRepositoryTest extends IntegrationTest
         $this->entityManager->persist($privateMessage);
         $this->entityManager->flush();
 
-        $user->setLastReadOffset(18);
-
         $expected = [$privateMessage];
 
-        $actual = $this->repository->getMessagesForUser($user, 30);
+        $actual = $this->repository->getMessagesForUser($user->getId(), 18, 30);
 
         self::assertEquals($expected, $actual);
     }
@@ -124,7 +122,7 @@ class MessageRepositoryTest extends IntegrationTest
 
         $expected = [$publicMessage];
 
-        $actual = $this->repository->getMessagesForUser($user, 30);
+        $actual = $this->repository->getMessagesForUser($user->getId(), 0, 30);
 
         self::assertEquals($expected, $actual);
     }

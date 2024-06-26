@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Application\QueryHandler;
 
-use App\Application\Query\GetFeedUpdatesQuery;
+use App\Application\Query\GetFullFeedQuery;
 use App\Domain\Model\Entity\Message;
 use App\Domain\Model\Entity\React;
 use App\Domain\Model\Entity\User;
@@ -13,7 +13,7 @@ use App\Domain\Repository\ReactRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\SecurityBundle\Security;
 
-class GetFeedUpdatesQueryHandler
+class GetFullFeedQueryHandler
 {
     public function __construct(
         private readonly Security $security,
@@ -24,7 +24,7 @@ class GetFeedUpdatesQueryHandler
     }
 
     /** @return list<React|Message> */
-    public function handle(GetFeedUpdatesQuery $query): array
+    public function handle(GetFullFeedQuery $query): array
     {
         $currentUser = $this->security->getUser();
 
@@ -34,8 +34,8 @@ class GetFeedUpdatesQueryHandler
 
         $offset = (new \DateTimeImmutable())->getTimestamp() - $currentUser->getCreatedAt()->getTimestamp();
 
-        $messages = $this->messageRepository->getMessagesForUser($currentUser->getId(), $currentUser->getLastReadOffset(), $offset);
-        $reacts = $this->reactRepository->getReactsForUser($currentUser->getId(), $currentUser->getLastReadOffset(), $offset);
+        $messages = $this->messageRepository->getMessagesForUser($currentUser->getId(), 0, $offset);
+        $reacts = $this->reactRepository->getReactsForUser($currentUser->getId(), 0, $offset);
 
         $feed = array_merge($messages, $reacts);
 

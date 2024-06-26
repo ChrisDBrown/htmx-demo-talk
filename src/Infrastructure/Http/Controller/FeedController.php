@@ -7,6 +7,7 @@ namespace App\Infrastructure\Http\Controller;
 use App\Application\Command\AddUserMessageCommand;
 use App\Application\Command\AddUserReactCommand;
 use App\Application\Query\GetFeedUpdatesQuery;
+use App\Application\Query\GetFullFeedQuery;
 use App\Domain\Model\Entity\User;
 use App\Domain\Model\Enum\ReactType;
 use League\Tactician\CommandBus;
@@ -24,8 +25,16 @@ class FeedController extends AbstractController
     ) {
     }
 
-    #[Route('/', name: 'new', methods: [Request::METHOD_GET])]
+    #[Route('/full', name: 'full', methods: [Request::METHOD_POST])]
     public function feed(): Response
+    {
+        $feedEntries = $this->queryBus->handle(new GetFullFeedQuery());
+
+        return $this->render('fragment/feed.html.twig', ['entries' => $feedEntries]);
+    }
+
+    #[Route('/new', name: 'new', methods: [Request::METHOD_GET])]
+    public function new(): Response
     {
         $feedEntries = $this->queryBus->handle(new GetFeedUpdatesQuery());
 

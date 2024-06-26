@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="mx-auto max-w-4xl text-center mt-24" id="container">
+        <h1 class="text-6xl md:text-8xl"><<span class="text-blue-600">/</span>> htm<span class="text-blue-600">x</span></h1>
+        <div class="mt-24 flex flex-col gap-8 max-w-xl mx-auto">
+            <div hx-trigger="done" hx-get="{{ path('fragment_tabs') }}" hx-swap="outerHTML transition:true" hx-target="#container">
+                {{ include('progress/progress.html.twig', {progress: 0}) }}
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -66,6 +66,6 @@ class CreateAndLoginAuthenticator extends AbstractLoginFormAuthenticator
     #[\Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->router->generate('page_dashboard'));
+        return new RedirectResponse($this->router->generate('page_loading'));
     }
 }

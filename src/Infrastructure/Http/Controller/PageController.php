@@ -29,9 +29,21 @@ class PageController extends AbstractController
         return $this->render('page/login.html.twig', ['username' => $username, 'error' => $error]);
     }
 
-    #[Route('/dashboard', name: 'dashboard', methods: [Request::METHOD_GET])]
-    public function dashboard(Request $request): Response
+    #[Route('/loading', name: 'loading', methods: [Request::METHOD_GET])]
+    public function loading(Request $request): Response
     {
-        return $this->render('page/dashboard.html.twig');
+        return $this->render('page/loading.html.twig');
+    }
+
+    #[Route('/feed', name: 'feed', methods: [Request::METHOD_GET])]
+    public function dashboard(): Response
+    {
+        return $this->render('page/feed.html.twig');
+    }
+
+    #[Route('/settings', name: 'settings', methods: [Request::METHOD_GET])]
+    public function settings(): Response
+    {
+        return $this->render('page/settings.html.twig');
     }
 }

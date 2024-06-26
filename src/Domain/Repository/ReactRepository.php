@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Repository;
 
 use App\Domain\Model\Entity\React;
-use App\Domain\Model\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @extends ServiceEntityRepository<React>
@@ -21,15 +21,15 @@ class ReactRepository extends ServiceEntityRepository
     }
 
     /** @return list<React> */
-    public function getReactsForUser(User $user, int $offset): array
+    public function getReactsForUser(UuidV7 $userId, int $startOffset, int $endOffset): array
     {
         return $this->createQueryBuilder('r')
-            ->andWhere('r.offset <= :offset')
-            ->andWhere('r.offset > :lastOffset')
+            ->andWhere('r.offset >= :startOffset')
+            ->andWhere('r.offset < :endOffset')
             ->andWhere('r.userId = :id OR r.userId IS NULL')
-            ->setParameter('offset', $offset)
-            ->setParameter('lastOffset', $user->getLastReadOffset())
-            ->setParameter('id', $user->getId(), UuidType::NAME)
+            ->setParameter('startOffset', $startOffset)
+            ->setParameter('endOffset', $endOffset)
+            ->setParameter('id', $userId, UuidType::NAME)
             ->getQuery()
             ->getResult();
     }

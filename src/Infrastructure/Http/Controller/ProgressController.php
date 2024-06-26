@@ -12,17 +12,17 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/progress', name: 'progress_')]
 class ProgressController extends AbstractController
 {
-    #[Route('/update', name: 'start', methods: [Request::METHOD_GET])]
+    #[Route('/update', name: 'update', methods: [Request::METHOD_GET])]
     public function update(Request $request): Response
     {
         $progress = null !== $request->query->get('p') ? (int) ($request->query->get('p')) : 0;
 
-        $progress += random_int(2, 30);
+        $progress += random_int(10, 40);
 
         if ($progress >= 100) {
             $response = $this->render('progress/progress.html.twig', ['progress' => $progress]);
 
-            $response->headers->add(['HX-Trigger' => 'done']);
+            $response->headers->add(['HX-Trigger' => 'done', 'HX-Push-Url' => $this->generateUrl('page_feed')]);
 
             return $response;
         }

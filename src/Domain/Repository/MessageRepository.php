@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace App\Domain\Repository;
 
 use App\Domain\Model\Entity\Message;
-use App\Domain\Model\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @extends ServiceEntityRepository<Message>
@@ -21,15 +21,15 @@ class MessageRepository extends ServiceEntityRepository
     }
 
     /** @return list<Message> */
-    public function getMessagesForUser(User $user, int $offset): array
+    public function getMessagesForUser(UuidV7 $userId, int $startOffset, int $endOffset): array
     {
         return $this->createQueryBuilder('m')
-            ->andWhere('m.offset <= :offset')
-            ->andWhere('m.offset > :lastOffset')
+            ->andWhere('m.offset >= :startOffset')
+            ->andWhere('m.offset < :endOffset')
             ->andWhere('m.userId = :id OR m.userId IS NULL')
-            ->setParameter('offset', $offset)
-            ->setParameter('lastOffset', $user->getLastReadOffset())
-            ->setParameter('id', $user->getId(), UuidType::NAME)
+            ->setParameter('startOffset', $startOffset)
+            ->setParameter('endOffset', $endOffset)
+            ->setParameter('id', $userId, UuidType::NAME)
             ->getQuery()
             ->getResult();
     }

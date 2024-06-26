@@ -20,7 +20,7 @@ security:
                 - App\Application\Authenticator\CreateAndLoginAuthenticator
             logout:
                 path: /logout
-                target: page_login
+                target: page_home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -32,7 +32,7 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
         # - { path: ^/admin, roles: ROLE_ADMIN }
-         - { path: ^/dashboard, roles: ROLE_USER }
+         - { path: ^/feed, roles: ROLE_USER }
 
 when@test:
     security:
