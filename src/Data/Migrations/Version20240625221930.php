@@ -12,8 +12,7 @@ final class Version20240625221930 extends AbstractMigration
     #[\Override]
     public function getDescription(): string
     {
-        // @TODO: Write description
-        return '';
+        return 'Add messages and reactions for feed';
     }
 
     #[\Override]
