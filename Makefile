@@ -40,6 +40,7 @@ prod: ## Do everything needed for a fresh production setup
 	@$(SYMFONY) doctrine:database:drop --force
 	@$(SYMFONY) doctrine:database:create
 	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
+	@$(SYMFONY) doctrine:fixtures:load --no-interaction
 
 ## —— Tools 🛠️ ——————————————————————————————————————————————————————————————————
 test: ## Start tests with phpunit, pass the parameter "c=" to add options to phpunit, example: make test c="--group e2e --stop-on-failure"
@@ -82,21 +83,21 @@ var-dump:
 all: test stan rector cs deptrac var-dump ## Run all our code quality tools as one
 
 ## —— Database 📋 ——————————————————————————————————————————————————————————————
-db-reset:
+db-reset: ## Wipe and recreate the databases
 	@$(SYMFONY) doctrine:database:drop --force
 	@$(SYMFONY) doctrine:database:drop --force --env=test
 	@$(SYMFONY) doctrine:database:create
 	@$(SYMFONY) doctrine:database:create --env=test
 
-migrations-diff: ##@Doctrine Generates a database migration by comparing the current database to the mapping information
+migrations-diff: ## Generates a database migration by comparing the current database to the mapping information
 	@$(SYMFONY) doctrine:migrations:diff
 	@$(PHP_CONT) vendor/bin/php-cs-fixer fix src/Data/Migrations
 
-migrations-create: ##@Doctrine Generates a blank database migration
+migrations-create: ## Generates a blank database migration
 	@$(SYMFONY) doctrine:migrations:generate
 	@$(PHP_CONT) vendor/bin/php-cs-fixer fix src/Data/Migrations
 
-migrations-migrate: ##@Doctrine Runs the database migrations
+migrations-migrate: ## Runs the database migrations
 	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
 	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration --env=test
 
