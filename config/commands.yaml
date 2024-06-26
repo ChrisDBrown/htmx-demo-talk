@@ -2,3 +2,11 @@ services:
     _defaults:
         autowire: true
         autoconfigure: true
+
+    App\Application\CommandHandler\AddUserMessageCommandHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Command\AddUserMessageCommand, bus: command }
+    
+    App\Application\CommandHandler\AddUserReactCommandHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Command\AddUserReactCommand, bus: command }

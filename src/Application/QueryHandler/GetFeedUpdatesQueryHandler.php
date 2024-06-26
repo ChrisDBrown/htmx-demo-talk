@@ -39,9 +39,7 @@ class GetFeedUpdatesQueryHandler
 
         $feed = array_merge($messages, $reacts);
 
-        usort($feed, function (Message|React $a, Message|React $b) {
-            return $a->getOffset() <=> $b->getOffset();
-        });
+        usort($feed, static fn (Message|React $a, Message|React $b) => $a->getOffset() <=> $b->getOffset());
 
         $currentUser->setLastReadOffset($offset);
         $this->entityManager->persist($currentUser);

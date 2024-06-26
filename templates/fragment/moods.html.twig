@@ -2,12 +2,10 @@
     id="moodlist"
     tabindex="-1" role="listbox" aria-labelledby="listbox-label"
     aria-activedescendant="listbox-option-5">
-    <!--
-      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-      Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-    -->
     <li class="relative cursor-default select-none bg-white px-3 py-2 hover:bg-gray-100 cursor-pointer"
+        hx-post="{{ path('feed_react', {react: 'fire'}) }}"
+        hx-target="#moodlist"
+        hx-swap="outerHTML"
         id="listbox-option-0" role="option">
         <div class="flex items-center">
             <div
@@ -22,12 +20,10 @@
             <span class="ml-3 block truncate font-medium">Fire</span>
         </div>
     </li>
-    <!--
-      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-      Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-    -->
     <li class="relative cursor-default select-none bg-white px-3 py-2 hover:bg-gray-100 cursor-pointer"
+        hx-post="{{ path('feed_react', {react: 'love'}) }}"
+        hx-target="#moodlist"
+        hx-swap="outerHTML"
         id="listbox-option-1" role="option">
         <div class="flex items-center">
             <div
@@ -41,12 +37,10 @@
             <span class="ml-3 block truncate font-medium">Love</span>
         </div>
     </li>
-    <!--
-      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-      Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-    -->
     <li class="relative cursor-default select-none bg-white px-3 py-2 hover:bg-gray-100 cursor-pointer"
+        hx-post="{{ path('feed_react', {react: 'smile'}) }}"
+        hx-target="#moodlist"
+        hx-swap="outerHTML"
         id="listbox-option-2" role="option">
         <div class="flex items-center">
             <div
@@ -61,12 +55,10 @@
             <span class="ml-3 block truncate font-medium">Smile</span>
         </div>
     </li>
-    <!--
-      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-      Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-    -->
     <li class="relative cursor-default select-none bg-white px-3 py-2 hover:bg-gray-100 cursor-pointer"
+        hx-post="{{ path('feed_react', {react: 'thumbs'}) }}"
+        hx-target="#moodlist"
+        hx-swap="outerHTML"
         id="listbox-option-4" role="option">
         <div class="flex items-center">
             <div
@@ -80,13 +72,8 @@
             <span class="ml-3 block truncate font-medium">Thumbs up</span>
         </div>
     </li>
-    <!--
-      Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation.
-
-      Highlighted: "bg-gray-100", Not Highlighted: "bg-white"
-    -->
     <li class="relative cursor-default select-none bg-white px-3 py-2 hover:bg-gray-100 cursor-pointer"
-        hx-get="{{ path('fragment_closed_moods') }}"
+        hx-post="{{ path('feed_react') }}"
         hx-target="#moodlist"
         hx-swap="outerHTML"
         id="listbox-option-5" role="option">
