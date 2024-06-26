@@ -29,7 +29,7 @@ class AddUserMessageCommandHandler
         $message = new Message(
             Uuid::v7(),
             $command->content,
-            $user->getLastReadOffset() + 2,
+            $user->getLastReadOffset(),
             $user->getUsername(),
             $user->getId()
         );

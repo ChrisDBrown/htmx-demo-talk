@@ -38,7 +38,7 @@ class FeedController extends AbstractController
     {
         $feedEntries = $this->queryBus->handle(new GetFeedUpdatesQuery());
 
-        return $this->render('fragment/message.html.twig', ['entries' => $feedEntries]);
+        return $this->render('fragment/messages.html.twig', ['entries' => $feedEntries]);
     }
 
     #[Route('/react', name: 'react', methods: [Request::METHOD_POST])]

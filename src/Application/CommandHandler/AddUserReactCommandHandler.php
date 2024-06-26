@@ -29,7 +29,7 @@ class AddUserReactCommandHandler
         $react = new React(
             Uuid::v7(),
             $command->type,
-            $user->getLastReadOffset() + 2,
+            $user->getLastReadOffset(),
             $user->getUsername(),
             $user->getId()
         );
