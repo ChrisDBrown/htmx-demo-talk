@@ -61,7 +61,7 @@ jobs:
         run: docker compose exec -T php bin/console -e test doctrine:schema:validate
       -
         name: Run PHPStan
-        run: docker compose exec -T php vendor/bin/phpstan analyse
+        run: docker compose exec -T php vendor/bin/phpstan analyse --memory-limit=-1
       -
         name: Run Rector
         run: docker compose exec -T php vendor/bin/rector --dry-run

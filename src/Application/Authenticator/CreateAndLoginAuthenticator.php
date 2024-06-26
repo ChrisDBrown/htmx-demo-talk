@@ -55,7 +55,7 @@ class CreateAndLoginAuthenticator extends AbstractLoginFormAuthenticator
             throw new CustomUserMessageAuthenticationException(sprintf('Username %s already exists', $username));
         }
 
-        $user = new User(Uuid::v4(), $username);
+        $user = new User(Uuid::v7(), $username);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
@@ -66,6 +66,6 @@ class CreateAndLoginAuthenticator extends AbstractLoginFormAuthenticator
     #[\Override]
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
-        return new RedirectResponse($this->router->generate('page_dashboard'));
+        return new RedirectResponse($this->router->generate('page_loading'));
     }
 }

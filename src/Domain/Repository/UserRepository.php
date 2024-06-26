@@ -8,7 +8,8 @@ use App\Domain\Model\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\Uid\Uuid;
+use Symfony\Bridge\Doctrine\Types\UuidType;
+use Symfony\Component\Uid\UuidV7;
 
 /**
  * @extends ServiceEntityRepository<User>
@@ -20,11 +21,11 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    public function findUserById(Uuid $id): ?User
+    public function findUserById(UuidV7 $id): ?User
     {
         return $this->createQueryBuilder('u')
             ->andWhere('u.id = :id')
-            ->setParameter('id', $id)
+            ->setParameter('id', $id, UuidType::NAME)
             ->getQuery()
             ->getOneOrNullResult(Query::HYDRATE_OBJECT);
     }

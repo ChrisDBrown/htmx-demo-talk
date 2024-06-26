@@ -3,3 +3,11 @@ services:
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+    
+    App\Application\QueryHandler\GetFullFeedQueryHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Query\GetFullFeedQuery, bus: query }
+        
+    App\Application\QueryHandler\GetFeedUpdatesQueryHandler:
+        tags:
+            - { name: tactician.handler, command: App\Application\Query\GetFeedUpdatesQuery, bus: query }

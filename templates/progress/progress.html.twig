@@ -1,5 +1,5 @@
 <div
-    hx-get="/progress/update?p={{ progress }}"
+    hx-get="{{ path('progress_update', {p: progress}) }}"
     hx-trigger="every 600ms"
     hx-target="this"
     hx-swap="outerHTML">
