@@ -27,7 +27,7 @@ class AppFixtures extends Fixture
         array_shift($rows);
 
         $time = 0;
-        while ($time < 60 * 60) {
+        while ($time < 30 * 60) {
             $rowParts = explode(',', array_shift($rows) ?? '');
 
             $message = new Message(
@@ -44,7 +44,7 @@ class AppFixtures extends Fixture
         }
 
         $time = 0;
-        while ($time < 60 * 60) {
+        while ($time < 30 * 60) {
             /** @var ReactType $react */
             $react = $faker->randomElement(ReactType::class);
 
@@ -60,6 +60,22 @@ class AppFixtures extends Fixture
 
             $time += random_int(2, 20);
         }
+
+        $manager->persist(new Message(
+            Uuid::v7(),
+            'This is the end of the demo! No more fake tweets! Goodbye!',
+            30 * 60,
+            'chrisdbrown',
+            null
+        ));
+
+        $manager->persist(new React(
+            Uuid::v7(),
+            ReactType::FIRE,
+            (30 * 60) + 1,
+            'chrisdbrown',
+            null
+        ));
 
         $manager->flush();
     }
