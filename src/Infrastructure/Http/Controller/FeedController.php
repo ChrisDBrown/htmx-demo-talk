@@ -38,6 +38,10 @@ class FeedController extends AbstractController
     {
         $feedEntries = $this->queryBus->handle(new GetFeedUpdatesQuery());
 
+        if (count($feedEntries) === 0) {
+            return new Response('', Response::HTTP_NO_CONTENT);
+        }
+
         return $this->render('fragment/messages.html.twig', ['entries' => $feedEntries]);
     }
 
