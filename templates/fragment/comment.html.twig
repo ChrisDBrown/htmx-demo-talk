@@ -1,10 +1,19 @@
-<form action="#" class="relative flex-auto" hx-post="{{ path('feed_message') }}" hx-swap="outerHTML" hx-target="this">
-    <div
-        class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+<form
+    action="#"
+    class="relative flex-auto"
+    hx-post="{{ path('feed_message') }}"
+    hx-swap="outerHTML"
+    hx-target="this"
+>
+    <div class="overflow-hidden rounded-lg pb-12 shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
         <label for="comment" class="sr-only">Add your comment</label>
-        <textarea rows="2" name="comment" id="comment"
-                  class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-                  placeholder="Add your comment..."></textarea>
+        <textarea
+            rows="2"
+            name="comment"
+            id="comment"
+            class="block w-full resize-none border-0 bg-transparent py-1.5 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+            placeholder="Add your comment..."
+        ></textarea>
     </div>
 
     <div class="absolute inset-x-0 bottom-0 flex justify-end py-2 pl-3 pr-2">
@@ -14,32 +23,38 @@
                     <label id="listbox-label" class="sr-only">Your mood</label>
                     <div class="relative">
                         {{ include('fragment/closed-moods.html.twig') }}
-                        <button type="button"
-                                class="relative -m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500"
-                                aria-haspopup="listbox" aria-expanded="true" aria-labelledby="listbox-label"
-                                hx-get="{{ path('fragment_moods') }}"
-                                hx-target="#moodlist"
-                                hx-swap="outerHTML"
+                        <button
+                            type="button"
+                            class="relative -m-2.5 flex h-10 w-10 items-center justify-center rounded-full text-gray-400 hover:text-gray-500"
+                            aria-haspopup="listbox"
+                            aria-expanded="true"
+                            aria-labelledby="listbox-label"
+                            hx-get="{{ path('fragment_moods') }}"
+                            hx-target="#moodlist"
+                            hx-swap="outerHTML"
                         >
-                                        <span class="flex items-center justify-center">
-                                          <span>
-                                            <svg class="h-5 w-5 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor"
-                                                 aria-hidden="true">
-                                              <path fill-rule="evenodd"
-                                                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-4.464a.75.75 0 10-1.061-1.061 3.5 3.5 0 01-4.95 0 .75.75 0 00-1.06 1.06 5 5 0 007.07 0zM9 8.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S7.448 7 8 7s1 .672 1 1.5zm3 1.5c.552 0 1-.672 1-1.5S12.552 7 12 7s-1 .672-1 1.5.448 1.5 1 1.5z"
-                                                    clip-rule="evenodd"/>
-                                            </svg>
-                                            <span class="sr-only">Add your mood</span>
-                                          </span>
-                                        </span>
+                            <span class="flex items-center justify-center">
+                                <span>
+                                    <svg
+                                        class="h-5 w-5 flex-shrink-0"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true"
+                                    >
+                                        <path
+                                            fill-rule="evenodd"
+                                            d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.536-4.464a.75.75 0 10-1.061-1.061 3.5 3.5 0 01-4.95 0 .75.75 0 00-1.06 1.06 5 5 0 007.07 0zM9 8.5c0 .828-.448 1.5-1 1.5s-1-.672-1-1.5S7.448 7 8 7s1 .672 1 1.5zm3 1.5c.552 0 1-.672 1-1.5S12.552 7 12 7s-1 .672-1 1.5.448 1.5 1 1.5z"
+                                            clip-rule="evenodd"
+                                        />
+                                    </svg>
+                                    <span class="sr-only">Add your mood</span>
+                                </span>
+                            </span>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-        <button type="submit"
-                class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
-            Comment
-        </button>
+        <button type="submit" class="rounded-md bg-white px-2.5 py-1.5 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Comment</button>
     </div>
 </form>

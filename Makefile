@@ -101,6 +101,9 @@ migrations-migrate: ## Runs the database migrations
 	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration
 	@$(SYMFONY) doctrine:migrations:migrate --no-interaction --allow-no-migration --env=test
 
+db-build: db-reset migrations-migrate
+	@$(SYMFONY) doctrine:fixtures:load --no-interaction
+
 ## —— Composer 🧙 ——————————————————————————————————————————————————————————————
 composer: ## Run composer, pass the parameter "c=" to run a given command, example: make composer c='req symfony/orm-pack'
 	@$(eval c ?=)

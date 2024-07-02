@@ -1,9 +1,22 @@
 <div
-    hx-get="{{ path('progress_update', {p: progress}) }}"
     hx-trigger="every 400ms"
+    hx-get="{{ path('progress_update', {p: progress}) }}"
     hx-target="this"
-    hx-swap="outerHTML">
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{ progress }}" aria-labelledby="pblabel">
-        <div id="pb" class="progress-bar" style="width:{{ progress }}%"></div>
+    hx-swap="outerHTML"
+>
+    <div
+        class="h-4 bg-gray-50 rounded-full"
+        role="progressbar"
+        aria-valuemin="0"
+        aria-valuemax="100"
+        aria-valuenow="{{ progress }}"
+    >
+        <div class="overflow-hidden rounded-full">
+            <div
+                id="pb"
+                class="h-4 rounded-full bg-blue-600 transition-[width] duration-200"
+                style="width: {{ progress }}%"
+            ></div>
+        </div>
     </div>
 </div>

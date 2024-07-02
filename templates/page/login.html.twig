@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="mx-auto max-w-4xl mt-24">
-        <h1 class="text-6xl md:text-8xl text-center"><<span class="text-blue-600">/</span>> htm<span class="text-blue-600">x</span></h1>
+        {{ include('fragment/logo.html.twig') }}
         {{ include('fragment/login.html.twig') }}
     </div>
 {% endblock %}

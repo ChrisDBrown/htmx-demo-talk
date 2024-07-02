@@ -8,6 +8,8 @@ use App\Application\Command\AddUserMessageCommand;
 use App\Application\Command\AddUserReactCommand;
 use App\Application\Query\GetFeedUpdatesQuery;
 use App\Application\Query\GetFullFeedQuery;
+use App\Domain\Model\Entity\Message;
+use App\Domain\Model\Entity\React;
 use App\Domain\Model\Entity\User;
 use App\Domain\Model\Enum\ReactType;
 use League\Tactician\CommandBus;
@@ -36,9 +38,10 @@ class FeedController extends AbstractController
     #[Route('/new', name: 'new', methods: [Request::METHOD_GET])]
     public function new(): Response
     {
+        /** @var list<React|Message> $feedEntries */
         $feedEntries = $this->queryBus->handle(new GetFeedUpdatesQuery());
 
-        if (count($feedEntries) === 0) {
+        if (0 === \count($feedEntries)) {
             return new Response('', Response::HTTP_NO_CONTENT);
         }
 
